@@ -5,5 +5,14 @@
     "source.organizeImports": true
   },
   "typescript.preferences.importModuleSpecifier": "relative",
+  "files.associations": {
+    ".env.*": "properties"
+  },
+  "material-icon-theme.folders.associations": {
+    "issues": "views",
+    "adapters": "pipe",
+    "external": "tools",
+    "usuario": "admin"
+  },
   "cSpell.words": []
 }

@@ -1,7 +1,8 @@
 import '@radix-ui/themes/styles.css'
-import './theme-config.css'
+
 //
 import './globals.css'
+import './theme-config.css'
 //
 import { Theme } from '@radix-ui/themes'
 import type { Metadata } from 'next'
@@ -11,6 +12,7 @@ import { Navbar } from '@/components/ui/Navbar'
 
 const inter = Inter({
   subsets: ['latin'],
+  display: 'swap',
   variable: '--font-inter',
 })
 
@@ -26,7 +28,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body suppressHydrationWarning={true} className={inter.variable}>
+      <body className={inter.variable}>
         <Theme appearance="light" accentColor="violet">
           <Navbar />
           <main className="p-5">{children}</main>

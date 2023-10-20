@@ -2,7 +2,7 @@
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.codeActionsOnSave": {
-    "source.organizeImports": true
+    "source.organizeImports": false
   },
   "typescript.preferences.importModuleSpecifier": "relative",
   "files.associations": {
@@ -14,5 +14,5 @@
     "external": "tools",
     "usuario": "admin"
   },
-  "cSpell.words": []
+  "cSpell.words": ["easymde", "simplemde"]
 }

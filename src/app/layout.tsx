@@ -1,6 +1,6 @@
 import '@radix-ui/themes/styles.css'
-import './globals.css'
 import './theme-config.css'
+import './globals.css'
 
 import { Theme } from '@radix-ui/themes'
 import type { Metadata } from 'next'
@@ -26,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <body>
-        <Theme appearance="light" accentColor="violet">
+        <Theme accentColor="violet">
           <Navbar />
           <main className="p-5">{children}</main>
         </Theme>

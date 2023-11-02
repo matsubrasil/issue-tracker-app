@@ -10,7 +10,8 @@ import 'easymde/dist/easymde.min.css'
 import dynamic from 'next/dynamic'
 import { createIssueSchema } from '@/app/validationSchemas'
 import { ErrorMessage } from '@/components/errorMessageForm/errorMessage'
-
+import { Spinner } from '@/components/ui/Spinner'
+// import SimpleMDE from 'react-simplemde-editor'
 const SimpleMDE = dynamic(() => import('react-simplemde-editor'), {
   ssr: false,
 })
@@ -33,6 +34,7 @@ export default function NewIssuePage() {
     resolver: zodResolver(createIssueSchema),
   })
   const [error, setError] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   console.log(register('description'))
   console.log('formState', errors)
@@ -48,11 +50,15 @@ export default function NewIssuePage() {
         onSubmit={handleSubmit(async (data) => {
           try {
             console.log(data)
+            setIsSubmitting(true)
             await axios.post('/api/issues', data)
             router.push('/issues')
           } catch (error) {
             console.log(error)
+            setIsSubmitting(false)
             setError('An expected error occurred.')
+          } finally {
+            setIsSubmitting(false)
           }
         })}
         className=" space-y-3"
@@ -65,11 +71,20 @@ export default function NewIssuePage() {
         <Controller
           name="description"
           control={control}
-          render={(field) => <SimpleMDE placeholder="Description" {...field} />}
+          render={({ field, formState, fieldState }) => (
+            <SimpleMDE
+              placeholder="Description"
+              {...field}
+              {...formState}
+              {...fieldState}
+            />
+          )}
         />
         <ErrorMessage>{errors.description?.message}</ErrorMessage>
 
-        <Button>Submit New Issue</Button>
+        <Button disabled={isSubmitting}>
+          Submit New Issue {isSubmitting && <Spinner />}
+        </Button>
       </form>
     </div>
   )

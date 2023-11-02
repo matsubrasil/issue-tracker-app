@@ -36,6 +36,38 @@ export default function NewIssuePage() {
   const [error, setError] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
 
+  async function onHandleSubmit(data: IssueForm) {
+    try {
+      // console.log(data)
+      setIsSubmitting(true)
+      await axios.post('/api/issues', data)
+      router.push('/issues')
+    } catch (error) {
+      // console.log(error)
+      setIsSubmitting(false)
+      setError('An expected error occurred.')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  // function onSubmit() {
+  //   handleSubmit(async (data) => {
+  //     try {
+  //       console.log(data)
+  //       setIsSubmitting(true)
+  //       await axios.post('/api/issues', data)
+  //       router.push('/issues')
+  //     } catch (error) {
+  //       console.log(error)
+  //       setIsSubmitting(false)
+  //       setError('An expected error occurred.')
+  //     } finally {
+  //       setIsSubmitting(false)
+  //     }
+  //   })
+  // }
+
   console.log(register('description'))
   console.log('formState', errors)
   return (
@@ -47,20 +79,7 @@ export default function NewIssuePage() {
       )}
 
       <form
-        onSubmit={handleSubmit(async (data) => {
-          try {
-            console.log(data)
-            setIsSubmitting(true)
-            await axios.post('/api/issues', data)
-            router.push('/issues')
-          } catch (error) {
-            console.log(error)
-            setIsSubmitting(false)
-            setError('An expected error occurred.')
-          } finally {
-            setIsSubmitting(false)
-          }
-        })}
+        onSubmit={handleSubmit((data) => onHandleSubmit(data))}
         className=" space-y-3"
       >
         <TextField.Root>

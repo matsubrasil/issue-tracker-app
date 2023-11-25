@@ -1,16 +1,16 @@
 'use client'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { useForm, Controller } from 'react-hook-form'
 import axios from 'axios'
 import { Button, Callout, TextField } from '@radix-ui/themes'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { Controller, useForm } from 'react-hook-form'
+import { createIssueSchema } from '@/app/validationSchemas'
+import { ErrorMessage, Spinner } from '@/components'
 import 'easymde/dist/easymde.min.css'
 import dynamic from 'next/dynamic'
-import { createIssueSchema } from '@/app/validationSchemas'
-import { ErrorMessage } from '@/components/errorMessageForm/errorMessage'
-import { Spinner } from '@/components/ui/Spinner'
+
 // import SimpleMDE from 'react-simplemde-editor'
 const SimpleMDE = dynamic(() => import('react-simplemde-editor'), {
   ssr: false,

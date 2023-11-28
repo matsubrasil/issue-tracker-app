@@ -3,8 +3,27 @@ POST http://localhost:3000/api/issues HTTP/1.1
 content-type: application/json
 
 {
-    "title": "First Issue",
+    "title": "First Issue Teste",
     "description": "Description of the first issue"
 
-    
+}
+
+###
+PATCH http://localhost:3000/api/issues/12 HTTP/1.1
+content-type: application/json
+
+{
+  "title": "Bug 1ABCx",
+  "description": "Description bug 1ABCxx"
+}
+
+
+
+###
+PATCH http://localhost:3000/api/issues/12 HTTP/1.1
+content-type: application/json
+
+{
+  "title": "",
+  "description": ""
 }

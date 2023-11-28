@@ -6,7 +6,7 @@ import { Button, Callout, TextField } from '@radix-ui/themes'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Controller, useForm } from 'react-hook-form'
-import { createIssueSchema } from '@/app/validationSchemas'
+import { issueSchema } from '@/app/validationSchemas'
 import { ErrorMessage, Spinner } from '@/components'
 import 'easymde/dist/easymde.min.css'
 import dynamic from 'next/dynamic'
@@ -17,7 +17,7 @@ const SimpleMDE = dynamic(() => import('react-simplemde-editor'), {
   ssr: false,
 })
 
-type IssueFormData = z.infer<typeof createIssueSchema>
+type IssueFormData = z.infer<typeof issueSchema>
 
 export function IssueForm({ issue }: { issue?: Issue }) {
   const router = useRouter()
@@ -27,14 +27,14 @@ export function IssueForm({ issue }: { issue?: Issue }) {
     handleSubmit,
     formState: { errors },
   } = useForm<IssueFormData>({
-    resolver: zodResolver(createIssueSchema),
+    resolver: zodResolver(issueSchema),
   })
   const [error, setError] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   async function onHandleSubmit(data: IssueFormData) {
     try {
-      console.log('data', data)
+      // console.log('data', data)
       setIsSubmitting(true)
       await axios.post('/api/issues', data)
       router.push('/issues')
@@ -47,8 +47,8 @@ export function IssueForm({ issue }: { issue?: Issue }) {
     }
   }
 
-  console.log('description ==> ', register('description'))
-  console.log('formState', errors)
+  // console.log('description ==> ', register('description'))
+  // console.log('formState', errors)
   return (
     <div className="max-w-xl">
       {error && (

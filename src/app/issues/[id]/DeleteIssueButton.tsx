@@ -8,7 +8,7 @@ export default function DeleteIssueButton({ issueId }: { issueId: number }) {
   return (
     <AlertDialog.Root>
       <AlertDialog.Trigger>
-        <Button variant="outline" color="red">
+        <Button className="bg-red-500" variant="solid" color="red">
           Delete Issue
         </Button>
       </AlertDialog.Trigger>
@@ -27,8 +27,7 @@ export default function DeleteIssueButton({ issueId }: { issueId: number }) {
           </AlertDialog.Cancel>
           <AlertDialog.Action>
             <Button
-              variant="outline"
-              color="red"
+              className="bg-red-500"
               onClick={async () => {
                 await axios.delete('/api/issues/' + issueId)
                 router.push('/issues')

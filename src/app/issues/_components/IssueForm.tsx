@@ -9,17 +9,16 @@ import { Controller, useForm } from 'react-hook-form'
 import { issueSchema } from '@/app/validationSchemas'
 import { ErrorMessage, Spinner } from '@/components'
 import 'easymde/dist/easymde.min.css'
-import dynamic from 'next/dynamic'
+// import dynamic from 'next/dynamic'
 import { Issue } from '@prisma/client'
-
-// import SimpleMDE from 'react-simplemde-editor'
-const SimpleMDE = dynamic(() => import('react-simplemde-editor'), {
-  ssr: false,
-})
+import SimpleMDE from 'react-simplemde-editor'
+// const SimpleMDE = dynamic(() => import('react-simplemde-editor'), {
+//   ssr: false,
+// })
 
 type IssueFormData = z.infer<typeof issueSchema>
 
-export function IssueForm({ issue }: { issue?: Issue }) {
+export default function IssueForm({ issue }: { issue?: Issue }) {
   const router = useRouter()
   const {
     register,
@@ -81,13 +80,8 @@ export function IssueForm({ issue }: { issue?: Issue }) {
           name="description"
           control={control}
           defaultValue={issue?.description}
-          render={({ field, formState, fieldState }) => (
-            <SimpleMDE
-              placeholder="Description"
-              {...field}
-              {...formState}
-              {...fieldState}
-            />
+          render={({ field }) => (
+            <SimpleMDE placeholder="Description" {...field} />
           )}
         />
         <ErrorMessage>{errors.description?.message}</ErrorMessage>

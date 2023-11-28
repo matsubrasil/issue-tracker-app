@@ -1,5 +1,5 @@
 'use client'
-import { AlertDialog, Button, Flex } from '@radix-ui/themes'
+import { AlertDialog, Button, Flex, Text } from '@radix-ui/themes'
 
 export default function DeleteIssueButton({ issueId }: { issueId: number }) {
   return (
@@ -12,8 +12,8 @@ export default function DeleteIssueButton({ issueId }: { issueId: number }) {
       <AlertDialog.Content style={{ maxWidth: 450 }}>
         <AlertDialog.Title>Confirm Deletion</AlertDialog.Title>
         <AlertDialog.Description size="2">
-          Are you sure you want to delete this issue? This action cannot be
-          undone.
+          <Text as="p">Are you sure you want to delete this issue?</Text>
+          <Text as="p">This action cannot be undone.</Text>
         </AlertDialog.Description>
 
         <Flex gap="3" mt="4" justify="end">

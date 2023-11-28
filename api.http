@@ -27,3 +27,8 @@ content-type: application/json
   "title": "",
   "description": ""
 }
+
+
+###
+DELETE http://localhost:3000/api/issues/6 HTTP/1.1
+content-type: application/json
